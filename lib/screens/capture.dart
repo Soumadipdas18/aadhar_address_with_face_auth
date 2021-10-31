@@ -678,7 +678,7 @@ class _captureState extends State<capture> {
   }
 
   Future<void> captureimage(String type,String errCode) async {
-    if (errCode == "0") {
+    // if (errCode == "0") {
       final PickedFile newImage = await pickImageFromCamera(context);
       if (type == "operator" && newImage != null && errCode == "0") {
         setState(() {
@@ -696,7 +696,7 @@ class _captureState extends State<capture> {
           }
         });
       }
-    }
+    // }
   }
 }
 
