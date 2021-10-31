@@ -417,7 +417,7 @@ class _scanDocState extends State<scanDoc> {
 
   //Operator captures document from camera
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);

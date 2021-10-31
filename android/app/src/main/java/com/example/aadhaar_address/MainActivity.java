@@ -7,12 +7,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
+import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.plugins.GeneratedPluginRegistrant;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.embedding.android.FlutterActivity;
-
+import io.flutter.embedding.engine.FlutterEngine;
 public class MainActivity extends FlutterActivity {
     private static final String INTENT_ACTION =
             "in.gov.uidai.rdservice.face.STATELESS_MATCH";
@@ -21,12 +22,14 @@ public class MainActivity extends FlutterActivity {
     private static final String RESPONSE =
             "response";
     private static MethodChannel.Result result;
-
+//    @Override
+//    public void registerWith(PluginRegistry registry) {
+//        FirebaseMessagingPlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin"));
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-
         new MethodChannel(getFlutterEngine().getDartExecutor().getBinaryMessenger(), "going.native.for.userdata").setMethodCallHandler(callHandler);
     }
 
@@ -59,6 +62,7 @@ public class MainActivity extends FlutterActivity {
 
     @Override
     protected void onActivityResult(int req, int res, Intent data) {
+        super.onActivityResult(req, res, data);
         if (res == Activity.RESULT_OK && null != data) {
             if (req == 123) {
 //                handleMatchResponse(StatelessMatchResponse.fromXML(data.getStringExtra(RESPONSE)))
