@@ -264,7 +264,9 @@ class _userLoginState extends State<userLogin> {
                           child: FlatButton(
                             onPressed: () async {
                               final uuidno = uuid.v4();
-                              isAsync = true;
+                              setState(() {
+                                isAsync = true;
+                              });
                               Map<String, dynamic> responsebody = await getotp(
                                   uuidno,
                                   user_aadhar,
@@ -281,13 +283,8 @@ class _userLoginState extends State<userLogin> {
                               });
                               if (errorcaptcha == false) {
                                 generateRefID();
-                                int step = await checkIfDocExists(userRefId);
-                                if (step == 0) {
-                                  addUser(userRefId);
-                                }
-                                else{
-                                  await getData();
-                                }
+                                // int step = await checkIfDocExists(userRefId);
+
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -297,6 +294,9 @@ class _userLoginState extends State<userLogin> {
                                         step: dbstep),
                                   ),
                                 );
+                                setState(() {
+                                  isAsync = false;
+                                });
                               }
                             },
                             child: Text(
